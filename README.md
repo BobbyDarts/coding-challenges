@@ -6,6 +6,13 @@ A collection of coding problem solutions from [Daily Coding Problem](https://www
 
 This repository contains my solutions to coding problems sent by Daily Coding Problem. Each problem is solved in TypeScript with comprehensive test coverage.
 
+## Problems Solved
+
+| #                | Problem      | Difficulty | Date Solved |
+| ---------------- | ------------ | ---------- | ----------- |
+| [1820](src/1820) | String Shift | Easy       | 2025-12-29  |
+| [1821](src/1821) | Square Root  | Medium     | 2026-01-02  |
+
 ## Project Structure
 
 ```
@@ -98,4 +105,4 @@ Each problem follows this workflow:
 
 ## License
 
-TMIT License - see [LICENSE](LICENSE) file for details.
+MIT License - see [LICENSE](LICENSE) file for details.
