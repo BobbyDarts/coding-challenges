@@ -8,13 +8,15 @@ const dryRun = args.includes("--dry-run") || args.includes("-d");
 
 // Filter out flags to get positional arguments
 const positionalArgs = args.filter((arg) => !arg.startsWith("-"));
-const [problemNumber, ...problemNameParts] = positionalArgs;
+const [platform, problemNumber, ...problemNameParts] = positionalArgs;
 const problemName = problemNameParts.join(" "); // Handle multi-word names without quotes
 
-if (!problemNumber || !problemName) {
-  console.error('Usage: npm run solve:dcp <problem-number> "<problem-name>"');
+if (!platform || !problemNumber || !problemName) {
   console.error(
-    '       npm run solve:dcp -- <problem-number> "<problem-name>" --dry-run'
+    'Usage: npm run solve:<platform> <problem-number> "<problem-name>"'
+  );
+  console.error(
+    '       npm run solve:<platform> -- <problem-number> "<problem-name>" --dry-run'
   );
   console.error('Example: npm run solve:dcp 1818 "Closest Points"');
   console.error(
@@ -23,7 +25,15 @@ if (!problemNumber || !problemName) {
   process.exit(1);
 }
 
-const branchName = `dcp/problem/${problemNumber}`;
+const branchName = `${platform}/problem/${problemNumber}`;
+
+// Create a nice display name for the platform
+const platformDisplay =
+  platform === "dailycodingproblem"
+    ? "DCP"
+    : platform === "leetcode"
+    ? "LeetCode"
+    : platform.charAt(0).toUpperCase() + platform.slice(1);
 
 if (dryRun) {
   console.log("🔍 DRY RUN MODE - No commands will be executed\n");
@@ -47,7 +57,7 @@ const runCommand = (command: string, description: string): void => {
 
 runCommand("git add .", "📝 Adding changes");
 runCommand(
-  `git commit -m "Solve DCP problem ${problemNumber}: ${problemName}"`,
+  `git commit -m "Solve ${platformDisplay} problem ${problemNumber}: ${problemName}"`,
   "💾 Committing"
 );
 runCommand("git checkout main", "🔄 Switching to main");

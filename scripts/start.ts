@@ -5,21 +5,16 @@ import { mkdirSync, writeFileSync, existsSync } from "fs";
 import { join } from "path";
 
 const args = process.argv.slice(2);
-const [problemNumber] = args;
+const [platform, problemNumber] = args;
 
-if (!problemNumber) {
-  console.error("Usage: npm run start:dcp <problem-number>");
+if (!platform || !problemNumber) {
+  console.error("Usage: npm run start:<platform> <problem-number>");
   console.error("Example: npm run start:dcp 1817");
   process.exit(1);
 }
 
-const branchName = `dcp/problem/${problemNumber}`;
-const problemDir = join(
-  process.cwd(),
-  "src",
-  "dailycodingproblem",
-  problemNumber
-);
+const branchName = `${platform}/problem/${problemNumber}`;
+const problemDir = join(process.cwd(), "src", platform, problemNumber);
 
 // Check if problem directory already exists
 if (existsSync(problemDir)) {
@@ -35,9 +30,7 @@ try {
   execSync(`git checkout -b ${branchName}`, { stdio: "inherit" });
 
   // Create directory
-  console.log(
-    `📁 Creating directory src/dailycodingproblem/${problemNumber}...`
-  );
+  console.log(`📁 Creating directory src/${platform}/${problemNumber}...`);
   mkdirSync(problemDir, { recursive: true });
 
   // Create PROBLEM.md
@@ -101,17 +94,19 @@ describe('Problem ${problemNumber}: [Problem Name]', () => {
   console.log(`\n✅ Problem ${problemNumber} initialized!`);
   console.log(`\nNext steps:`);
   console.log(
-    `  1. Edit src/dailycodingproblem/${problemNumber}/PROBLEM.md with the problem description`
+    `  1. Edit src/${platform}/${problemNumber}/PROBLEM.md with the problem description`
   );
+  console.log(`  2. Implement src/${platform}/${problemNumber}/solution.ts`);
   console.log(
-    `  2. Implement src/dailycodingproblem/${problemNumber}/solution.ts`
+    `  3. Add tests to src/${platform}/${problemNumber}/solution.test.ts`
   );
+  console.log(`  4. Run tests: npm test ${platform}/${problemNumber}`);
+
+  // Platform-specific solve command hints
+  const platformShorthand =
+    platform === "dailycodingproblem" ? "dcp" : platform;
   console.log(
-    `  3. Add tests to src/dailycodingproblem/${problemNumber}/solution.test.ts`
-  );
-  console.log(`  4. Run tests: npm test dailycodingproblem/${problemNumber}`);
-  console.log(
-    `  5. When done: npm run solve:dcp ${problemNumber} "<problem-name>"`
+    `  5. When done: npm run solve:${platformShorthand} ${problemNumber} "<problem-name>"`
   );
 } catch (error) {
   console.error("❌ Error:", error);

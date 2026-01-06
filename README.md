@@ -35,8 +35,8 @@ coding-challenges/
 │   ├── leetcode/ (coming soon)
 │   └── adventofcode/ (coming soon)
 ├── scripts/
-│   ├── start-dcp.ts
-│   └── solve-dcp.ts
+│   ├── start.ts
+│   └── solve.ts
 ├── package.json
 ├── tsconfig.json
 └── jest.config.mjs

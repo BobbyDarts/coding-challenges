@@ -7,8 +7,8 @@
     "test:watch": "jest --watch",
     "test:problem": "jest",
     "run": "ts-node",
-    "start:dcp": "ts-node scripts/start-dcp.ts",
-    "solve:dcp": "ts-node scripts/solve-dcp.ts"
+    "start:dcp": "ts-node scripts/start.ts dailycodingproblem",
+    "solve:dcp": "ts-node scripts/solve.ts dailycodingproblem"
   },
   "keywords": [],
   "author": "",
