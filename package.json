@@ -8,7 +8,15 @@
     "test:problem": "jest",
     "run": "ts-node",
     "start:dcp": "ts-node scripts/start.ts dailycodingproblem",
-    "solve:dcp": "ts-node scripts/solve.ts dailycodingproblem"
+    "solve:dcp": "ts-node scripts/solve.ts dailycodingproblem",
+    "start:leetcode": "ts-node scripts/start.ts leetcode",
+    "solve:leetcode": "ts-node scripts/solve.ts leetcode",
+    "start:fcc": "ts-node scripts/start.ts freecodecamp",
+    "solve:fcc": "ts-node scripts/solve.ts freecodecamp",
+    "start:aoc": "ts-node scripts/start.ts adventofcode",
+    "solve:aoc": "ts-node scripts/solve.ts adventofcode",
+    "start:euler": "ts-node scripts/start.ts projecteuler",
+    "solve:euler": "ts-node scripts/solve.ts projecteuler"
   },
   "keywords": [],
   "author": "",
