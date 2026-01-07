@@ -8,9 +8,9 @@ Project Euler is a collection of difficult math-focused programming problems. Wh
 
 ## Problems Solved
 
-| #                       | Problem             | Date Solved |
-| ----------------------- | ------------------- | ----------- |
-| [1](src/projecteuler/1) | Multiples of 3 or 5 | 2026-01-07  |
+| #        | Problem             | Date Solved |
+| -------- | ------------------- | ----------- |
+| [1](./1) | Multiples of 3 or 5 | 2026-01-07  |
 
 ## Workflow
 

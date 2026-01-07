@@ -8,10 +8,10 @@ FreeCodeCamp offers a comprehensive curriculum covering web development, algorit
 
 ## Problems Solved
 
-| #                           | Problem              | Date Solved |
-| --------------------------- | -------------------- | ----------- |
-| [145](src/freecodecamp/145) | Nth Fibonacci Number | 2026-01-07  |
-| [149](src/freecodecamp/145) | vOwElcAsE            | 2026-01-07  |
+| #            | Problem              | Date Solved |
+| ------------ | -------------------- | ----------- |
+| [145](./145) | Nth Fibonacci Number | 2026-01-07  |
+| [149](./149) | vOwElcAsE            | 2026-01-07  |
 
 ## Workflow
 
