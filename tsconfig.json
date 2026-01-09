@@ -7,7 +7,7 @@
 
     // Environment Settings
     // See also https://aka.ms/tsconfig/module
-    "target": "es2020",
+    "target": "es2024",
     "module": "esnext",
     "moduleResolution": "node",
     "types": ["jest", "node"],
