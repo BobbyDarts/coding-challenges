@@ -29,10 +29,14 @@
     // "noFallthroughCasesInSwitch": true,
     // "noPropertyAccessFromIndexSignature": true,
 
+    "esModuleInterop": true,
     "baseUrl": ".",
     "paths": {
       "@/*": ["src/*"],
+
+      "@utils": ["src/utils/index.ts"],
       "@utils/*": ["src/utils/*"],
+
       "@euler/*": ["src/projecteuler/*"],
       "@fcc/*": ["src/freecodecamp/*"],
       "@dcp/*": ["src/dailycodingproblem/*"]

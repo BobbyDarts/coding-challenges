@@ -54,6 +54,28 @@ describe("Even Fibonacci using Direct Recurrence", () => {
   });
 });
 
+describe("Even Fibonacci - Validation", () => {
+  test("should throw TypeError for non-numbers", () => {
+    expect(() => evenFibonacci("12" as any)).toThrow(TypeError);
+    expect(() => evenFibonacci(NaN)).toThrow(TypeError);
+  });
+
+  test("should throw RangeError for Infinity", () => {
+    expect(() => evenFibonacci(Infinity)).toThrow(RangeError);
+    expect(() => evenFibonacci(-Infinity)).toThrow(RangeError);
+  });
+
+  test("should throw TypeError for non-integers", () => {
+    expect(() => evenFibonacci(12.5)).toThrow(TypeError);
+    expect(() => evenFibonacci(3.14)).toThrow(TypeError);
+  });
+
+  test("should throw RangeError for negative numbers", () => {
+    expect(() => evenFibonacci(-1)).toThrow(RangeError);
+    expect(() => evenFibonacci(-5)).toThrow(RangeError);
+  });
+});
+
 describe("Fibonacci", () => {
   test("should return correct fibonacci numbers", () => {
     expect(fibonacci(0)).toBe(0);
@@ -74,10 +96,10 @@ describe("Fibonacci", () => {
     expect(fibonacci(1)).toBe(1);
   });
 
-  test("should handle negative numbers", () => {
-    expect(fibonacci(-1)).toBe(0);
-    expect(fibonacci(-5)).toBe(0);
-    expect(fibonacci(-100)).toBe(0);
+  test("should throw RangeError for negative numbers", () => {
+    expect(() => fibonacci(-1)).toThrow(RangeError);
+    expect(() => fibonacci(-5)).toThrow(RangeError);
+    expect(() => fibonacci(-100)).toThrow(RangeError);
   });
 
   test("should calculate larger fibonacci numbers", () => {
@@ -102,6 +124,28 @@ describe("Fibonacci", () => {
   test("should handle fibonacci(2) edge case", () => {
     // F(2) = F(1) + F(0) = 1 + 0 = 1
     expect(fibonacci(2)).toBe(1);
+  });
+});
+
+describe("Fibonacci - Validation", () => {
+  test("should throw TypeError for non-numbers", () => {
+    expect(() => fibonacci("12" as any)).toThrow(TypeError);
+    expect(() => fibonacci(NaN)).toThrow(TypeError);
+  });
+
+  test("should throw RangeError for Infinity", () => {
+    expect(() => fibonacci(Infinity)).toThrow(RangeError);
+    expect(() => fibonacci(-Infinity)).toThrow(RangeError);
+  });
+
+  test("should throw TypeError for non-integers", () => {
+    expect(() => fibonacci(12.5)).toThrow(TypeError);
+    expect(() => fibonacci(3.14)).toThrow(TypeError);
+  });
+
+  test("should throw RangeError for negative numbers", () => {
+    expect(() => fibonacci(-1)).toThrow(RangeError);
+    expect(() => fibonacci(-5)).toThrow(RangeError);
   });
 });
 
@@ -159,78 +203,137 @@ describe("Array Sum", () => {
   });
 });
 
+describe("Array Sum - Validation", () => {
+  test("should throw TypeError for non-arrays", () => {
+    expect(() => arraySum("123" as any)).toThrow(TypeError);
+    expect(() => arraySum(123 as any)).toThrow(TypeError);
+    expect(() => arraySum(null as any)).toThrow(TypeError);
+  });
+
+  test("should throw TypeError for arrays with non-numbers", () => {
+    expect(() => arraySum([1, 2, "3" as any])).toThrow(TypeError);
+    expect(() => arraySum([1, NaN, 3])).toThrow(TypeError);
+    expect(() => arraySum([1, Infinity, 3])).toThrow(TypeError);
+  });
+});
+
 describe("Range", () => {
   test("should generate range with start, stop, and step", () => {
-    expect(range({ start: 0, stop: 10, step: 2 })).toEqual([0, 2, 4, 6, 8, 10]);
-    expect(range({ start: 1, stop: 5, step: 1 })).toEqual([1, 2, 3, 4, 5]);
-    expect(range({ start: 5, stop: 15, step: 3 })).toEqual([5, 8, 11, 14]);
+    expect(range({ start: 0, stop: 11, step: 2 })).toEqual([0, 2, 4, 6, 8, 10]);
+    expect(range({ start: 1, stop: 6, step: 1 })).toEqual([1, 2, 3, 4, 5]);
+    expect(range({ start: 5, stop: 16, step: 3 })).toEqual([5, 8, 11, 14]);
   });
 
   test("should use default start of 0", () => {
-    expect(range({ stop: 5 })).toEqual([0, 1, 2, 3, 4, 5]);
-    expect(range({ stop: 3 })).toEqual([0, 1, 2, 3]);
+    expect(range({ stop: 5 })).toEqual([0, 1, 2, 3, 4]);
+    expect(range({ stop: 3 })).toEqual([0, 1, 2]);
   });
 
   test("should use default step of 1", () => {
-    expect(range({ start: 0, stop: 5 })).toEqual([0, 1, 2, 3, 4, 5]);
-    expect(range({ start: 2, stop: 7 })).toEqual([2, 3, 4, 5, 6, 7]);
+    expect(range({ start: 0, stop: 5 })).toEqual([0, 1, 2, 3, 4]);
+    expect(range({ start: 2, stop: 7 })).toEqual([2, 3, 4, 5, 6]);
   });
 
   test("should use both defaults (start=0, step=1)", () => {
-    expect(range({ stop: 4 })).toEqual([0, 1, 2, 3, 4]);
-    expect(range({ stop: 0 })).toEqual([0]);
+    expect(range({ stop: 4 })).toEqual([0, 1, 2, 3]);
+    expect(range({ stop: 0 })).toEqual([]);
   });
 
   test("should handle single element range", () => {
-    expect(range({ start: 5, stop: 5 })).toEqual([5]);
-    expect(range({ start: 0, stop: 0 })).toEqual([0]);
+    expect(range({ start: 5, stop: 6 })).toEqual([5]);
+    expect(range({ start: 0, stop: 1 })).toEqual([0]);
+  });
+
+  test("should return empty array when start equals stop", () => {
+    expect(range({ start: 5, stop: 5 })).toEqual([]);
+    expect(range({ start: 0, stop: 0 })).toEqual([]);
   });
 
   test("should handle negative numbers", () => {
-    expect(range({ start: -5, stop: 0 })).toEqual([-5, -4, -3, -2, -1, 0]);
-    expect(range({ start: -10, stop: -5, step: 2 })).toEqual([-10, -8, -6]);
+    expect(range({ start: -5, stop: 1 })).toEqual([-5, -4, -3, -2, -1, 0]);
+    expect(range({ start: -10, stop: -4, step: 2 })).toEqual([-10, -8, -6]);
   });
 
   test("should handle negative to positive range", () => {
-    expect(range({ start: -3, stop: 3 })).toEqual([-3, -2, -1, 0, 1, 2, 3]);
-    expect(range({ start: -2, stop: 2, step: 2 })).toEqual([-2, 0, 2]);
+    expect(range({ start: -3, stop: 4 })).toEqual([-3, -2, -1, 0, 1, 2, 3]);
+    expect(range({ start: -2, stop: 3, step: 2 })).toEqual([-2, 0, 2]);
   });
 
   test("should handle decimal steps", () => {
-    expect(range({ start: 0, stop: 2, step: 0.5 })).toEqual([
+    expect(range({ start: 0, stop: 2.1, step: 0.5 })).toEqual([
       0, 0.5, 1, 1.5, 2,
     ]);
-    expect(range({ start: 1, stop: 3, step: 0.25 })).toEqual([
+    expect(range({ start: 1, stop: 3.1, step: 0.25 })).toEqual([
       1, 1.25, 1.5, 1.75, 2, 2.25, 2.5, 2.75, 3,
     ]);
   });
 
   test("should handle larger steps", () => {
-    expect(range({ start: 0, stop: 20, step: 5 })).toEqual([0, 5, 10, 15, 20]);
-    expect(range({ start: 10, stop: 100, step: 10 })).toEqual([
+    expect(range({ start: 0, stop: 21, step: 5 })).toEqual([0, 5, 10, 15, 20]);
+    expect(range({ start: 10, stop: 101, step: 10 })).toEqual([
       10, 20, 30, 40, 50, 60, 70, 80, 90, 100,
     ]);
   });
 
   test("should handle step that does not evenly divide range", () => {
-    // When (stop - start) is not evenly divisible by step
-    expect(range({ start: 0, stop: 10, step: 3 })).toEqual([0, 3, 6, 9]);
-    expect(range({ start: 1, stop: 10, step: 4 })).toEqual([1, 5, 9]);
+    expect(range({ start: 0, stop: 11, step: 3 })).toEqual([0, 3, 6, 9]);
+    expect(range({ start: 1, stop: 11, step: 4 })).toEqual([1, 5, 9]);
   });
 
-  test("should create empty or single element for edge cases", () => {
-    expect(range({ start: 10, stop: 5 })).toEqual([]); // start > stop with positive step
-    expect(range({ start: 0, stop: 0, step: 5 })).toEqual([0]);
+  test("should handle negative steps (counting down)", () => {
+    expect(range({ start: 5, stop: 0, step: -1 })).toEqual([5, 4, 3, 2, 1]);
+    expect(range({ start: 10, stop: 0, step: -2 })).toEqual([10, 8, 6, 4, 2]);
+    expect(range({ start: 0, stop: -5, step: -1 })).toEqual([
+      0, -1, -2, -3, -4,
+    ]);
   });
 
-  test("should mimic Python range behavior", () => {
+  test("should return empty array for invalid direction", () => {
+    expect(range({ start: 10, stop: 5 })).toEqual([]); // positive step, start > stop
+    expect(range({ start: 0, stop: 5, step: -1 })).toEqual([]); // negative step, start < stop
+  });
+
+  test("should match Python range behavior exactly", () => {
     // Python: range(5) -> [0, 1, 2, 3, 4]
-    // Our range needs stop=4 to get same result since we're inclusive
-    expect(range({ stop: 4 })).toEqual([0, 1, 2, 3, 4]);
+    expect(range({ stop: 5 })).toEqual([0, 1, 2, 3, 4]);
 
     // Python: range(2, 8) -> [2, 3, 4, 5, 6, 7]
-    // Our range is inclusive, so stop=7 gives same result
-    expect(range({ start: 2, stop: 7 })).toEqual([2, 3, 4, 5, 6, 7]);
+    expect(range({ start: 2, stop: 8 })).toEqual([2, 3, 4, 5, 6, 7]);
+
+    // Python: range(0, 10, 2) -> [0, 2, 4, 6, 8]
+    expect(range({ start: 0, stop: 10, step: 2 })).toEqual([0, 2, 4, 6, 8]);
+
+    // Python: range(5, 0, -1) -> [5, 4, 3, 2, 1]
+    expect(range({ start: 5, stop: 0, step: -1 })).toEqual([5, 4, 3, 2, 1]);
+  });
+});
+
+describe("Range - Validation", () => {
+  test("should throw RangeError for zero step", () => {
+    expect(() => range({ stop: 5, step: 0 })).toThrow(RangeError);
+    expect(() => range({ stop: 5, step: 0 })).toThrow("step cannot be zero");
+  });
+
+  test("should throw TypeError for invalid stop", () => {
+    expect(() => range({ stop: NaN })).toThrow(TypeError);
+    expect(() => range({ stop: Infinity })).toThrow(TypeError);
+    expect(() => range({ stop: -Infinity })).toThrow(TypeError);
+  });
+
+  test("should throw TypeError for invalid start", () => {
+    expect(() => range({ start: NaN, stop: 5 })).toThrow(TypeError);
+    expect(() => range({ start: Infinity, stop: 5 })).toThrow(TypeError);
+    expect(() => range({ start: -Infinity, stop: 5 })).toThrow(TypeError);
+  });
+
+  test("should throw TypeError for invalid step", () => {
+    expect(() => range({ start: 0, stop: 5, step: NaN })).toThrow(TypeError);
+    expect(() => range({ start: 0, stop: 5, step: Infinity })).toThrow(
+      TypeError
+    );
+    expect(() => range({ start: 0, stop: 5, step: -Infinity })).toThrow(
+      TypeError
+    );
   });
 });
 

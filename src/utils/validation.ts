@@ -5,12 +5,29 @@ type ValidatePositiveIntegerParams = {
 };
 
 /**
- * Validates that a value is a positive integer
- * @param value - The value to validate
- * @param functionName - Name of the calling function for error messages
- * @param minValue - Minimum allowed value (default: 1)
+ * Validates that a value is a valid positive integer within a specified range
+ * @param params - Validation parameters
+ * @param params.value - The value to validate
+ * @param params.functionName - Name of the calling function (used in error messages)
+ * @param params.minValue - Minimum allowed value (default: 1)
  * @throws {TypeError} If value is not a valid number or not an integer
  * @throws {RangeError} If value is Infinity or below minValue
+ * @example
+ * validatePositiveInteger({
+ *   value: 5,
+ *   functionName: 'myFunc()'
+ * }); // passes
+ *
+ * validatePositiveInteger({
+ *   value: 0,
+ *   functionName: 'myFunc()',
+ *   minValue: 1
+ * }); // throws RangeError
+ *
+ * validatePositiveInteger({
+ *   value: 3.14,
+ *   functionName: 'myFunc()'
+ * }); // throws TypeError
  */
 // With optional params, I like to use a single object parameter for clarity
 export function validatePositiveInteger({
