@@ -31,3 +31,6 @@ npm-debug.log*
 
 # Optional
 .cache/
+
+# Developer Notes
+notes/
